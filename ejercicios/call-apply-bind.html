@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>call apply bind</title>
+  </head>
+  <body>
+    <ul>
+      <li><button class="call-to-action">Aprender</button></li>
+      <li><button class="call-to-action">Aprender más</button></li>
+      <li><button class="call-to-action">Nunca parar de aprender!!</button></li>
+    </ul>
+    <script>
+      // establece this usando call
+      function saludar() {
+        console.log(`Hola, soy ${this.name} ${this.lastName}`);
+      }
+
+      const aPerson = {
+        name: 'Fred',
+        lastName: 'Flinstone',
+      };
+
+      saludar.call(aPerson);
+      // establece this usando call y pasar argumentos a la funcion
+      function caminar(metros, direccion) {
+        console.log(`${this.name} camina ${metros}m hacia ${direccion}`);
+      }
+
+      caminar.call(aPerson, 50, 'oeste');
+      // establece this usando apply y pasar argumentos a la funcion
+      caminar.apply(aPerson, [500, 'Sur']);
+      // establece this en una nueva funcion usando bind
+      const aPerson2 = {
+        name: 'Daniel',
+        lastName: 'Sanchez',
+      };
+      const personSaludar = saludar.bind(aPerson2);
+      personSaludar();
+      const personaCaminar = caminar.bind(aPerson2, 2500, 'north');
+      personaCaminar(300, 'west');
+      // cuando es util usar uno de estos metodos
+
+      const buttons = document.getElementsByClassName('call-to-action');
+      console.log(buttons);
+      //   buttons.forEach((button) => {
+      //     button.onclick = () => {
+      //       console.log('onClick!!');
+      //       alert('Never give up!');
+      //     };
+      //   });
+      Array.prototype.forEach.call(buttons, (button) => {
+        button.onclick = () => alert('Never give up!');
+      });
+    </script>
+  </body>
+</html>
