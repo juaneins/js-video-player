@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>This</title>
+  </head>
+  <body>
+    <script>
+      console.log(this);
+
+      function whoIsThis() {
+        return this;
+      }
+
+      console.log('Who is this: ', whoIsThis());
+      // strict mode
+      function whoIsThis() {
+        'use strict';
+        return this;
+      }
+
+      console.log('Who is this strict mode: ', whoIsThis());
+      // this objeto
+      const person = {
+        name: 'Gabo',
+        saludar: function () {
+          console.log(`Hola, soy ${this.name}`);
+        },
+      };
+
+      person.saludar();
+
+      const accion = person.saludar;
+
+      console.log('Ejecutando accion: ', accion());
+      // this en contexto de clase
+      function Person(name) {
+        this.name = name;
+      }
+
+      Person.prototype.saludar = function () {
+        console.log(`Hola, soy ${this.name} desde contexto objeto`);
+      };
+
+      const personObj = new Person('Juan');
+      personObj.saludar();
+    </script>
+  </body>
+</html>
