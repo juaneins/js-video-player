@@ -61,3 +61,30 @@ function fullName(firstName: string, lastName: string = 'Smith'): string {
 
 const juan = fullName('juan', 'ballesteros');
 const pepe = fullName('pepe');
+
+// Interfaces
+interface Rectangulo {
+  ancho: number;
+  alto: number;
+  color?: Color;
+}
+
+let rect: Rectangulo = {
+  ancho: 4,
+  alto: 2,
+  color: Color.Verde,
+};
+
+function area(r: Rectangulo) {
+  return r.ancho * r.alto;
+}
+
+const areaRect = area(rect);
+
+console.log(areaRect);
+
+rect.toString = function () {
+  return `Un rectangulo ${this.color}`;
+};
+
+console.log(rect.toString());
